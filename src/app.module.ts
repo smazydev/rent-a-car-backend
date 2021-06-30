@@ -1,12 +1,23 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app/app.controller';
 import { AppService } from './app/app.service';
-import { CarsController } from './cars/cars.controller';
-import { MongooseModule } from "@nestjs/mongoose";
+import { MongooseModule } from '@nestjs/mongoose';
+import { CarsModule } from './cars/cars.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [MongooseModule.forRoot(`mongodb+srv://smazy1437:${process.env.DB_PASS}@cluster0.d59hr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)],
-  controllers: [AppController, CarsController],
+  imports: [
+    ConfigModule.forRoot(),
+    CarsModule,
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get('DB_URI'),
+      }),
+      inject: [ConfigService],
+    }),
+  ],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
