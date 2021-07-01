@@ -1,0 +1,11 @@
+POST http://localhost:3000/cars HTTP/1.1
+content-type: application/json
+
+{
+    "name":"Mercedes Benz",
+    "transmission":"auto",
+    "mileage":10000,
+    "dailyPrice":200,
+    "monthlyPrice":6000,
+    "gas":"petrol"
+}	

@@ -21,7 +21,7 @@ export class Car {
   monthlyPrice: number;
 
   @Prop()
-  gearType: string;
+  transmission: string;
 
   @Prop()
   gas: string;
