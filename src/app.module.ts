@@ -3,6 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CarsModule } from './cars/cars.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RentedController } from './rented/rented.controller';
+import { RentedService } from './rented/rented.service';
+import { RentedModule } from './rented/rented.module';
 
 @Module({
   imports: [
@@ -15,8 +17,9 @@ import { RentedController } from './rented/rented.controller';
       }),
       inject: [ConfigService],
     }),
+    RentedModule,
   ],
-  controllers: [RentedController],
-  providers: [],
+  providers:[],
+  controllers:[]
 })
 export class AppModule {}
